@@ -3,11 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Promocioncontroller;
-use App\Http\Controllers\listacontroller;
-use App\Http\Controllers\proveedorescontroller;
-use App\Http\Controllers\gastoscontroller;
-use App\Http\Controllers\empleadoscontroller;
-use App\Http\Controllers\clienteController;
+use App\Http\Controllers\ListaController;
+use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\GastosController;
+use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
@@ -48,28 +48,28 @@ Route::middleware(['admin'])->group(function () {
     }) ->name('views.compras');
     //rutas para proveedores
 
-Route::get('/proveedores', [proveedorescontroller::class, 'mostrar'])->name('views.proveedores');
-Route::POST('/proveedores', [proveedorescontroller::class, 'agregar'])->name('proveedores.agregar');
-Route::get('/proveedores/modificar', [proveedorescontroller::class, 'modificar'])->name('proveedores.modificar');
-Route::delete('/proveedores/{id_proveedor}', [proveedorescontroller::class, 'borrar'])->name('proveedores.borrar');
+Route::get('/proveedores', [ProveedoresController::class, 'mostrar'])->name('views.proveedores');
+Route::POST('/proveedores', [ProveedoresController::class, 'agregar'])->name('proveedores.agregar');
+Route::get('/proveedores/modificar', [ProveedoresController::class, 'modificar'])->name('proveedores.modificar');
+Route::delete('/proveedores/{id_proveedor}', [ProveedoresController::class, 'borrar'])->name('proveedores.borrar');
 
 //rutas gastos
-Route::get('/gastos', [gastoscontroller::class, 'mostrar'])->name('views.gastos');
-Route::POST('/gastos', [gastoscontroller::class, 'agregar'])->name('gastos.agregar');
-Route::get('/gastos/modificar', [gastoscontroller::class, 'modificar'])->name('gastos.modificar');
-Route::delete('/gastos/{id_gasto}', [gastoscontroller::class, 'borrar'])->name('gastos.borrar');
+Route::get('/gastos', [GastosController::class, 'mostrar'])->name('views.gastos');
+Route::POST('/gastos', [GastosController::class, 'agregar'])->name('gastos.agregar');
+Route::get('/gastos/modificar', [GastosController::class, 'modificar'])->name('gastos.modificar');
+Route::delete('/gastos/{id_gasto}', [GastosController::class, 'borrar'])->name('gastos.borrar');
 
 //ruta para empleados
-Route::get('/empleados', [empleadoscontroller::class, 'mostrar'])->name('views.empleados');
-Route::POST('/empleados', [empleadoscontroller::class, 'agregar'])->name('empleados.agregar');
-Route::get('/empleados/modificar', [empleadoscontroller::class, 'modificar'])->name('empleados.modificar');
-Route::delete('/empleados/{id}', [empleadoscontroller::class, 'borrar'])->name('empleados.borrar');
+Route::get('/empleados', [EmpleadosController::class, 'mostrar'])->name('views.empleados');
+Route::POST('/empleados', [EmpleadosController::class, 'agregar'])->name('empleados.agregar');
+Route::get('/empleados/modificar', [EmpleadosController::class, 'modificar'])->name('empleados.modificar');
+Route::delete('/empleados/{id}', [EmpleadosController::class, 'borrar'])->name('empleados.borrar');
 
 //ruta para clientes
-Route::get('/clientes', [clienteController::class, 'mostrar'])->name('views.clientes');
-Route::POST('/clientes', [clienteController::class, 'agregar'])->name('clientes.agregar');
-Route::get('/clientes/modificar', [clienteController::class, 'modificar'])->name('clientes.modificar');
-Route::delete('/clientes/{id_cliente}', [clienteController::class, 'borrar'])->name('clientes.borrar');
+Route::get('/clientes', [ClienteController::class, 'mostrar'])->name('views.clientes');
+Route::POST('/clientes', [ClienteController::class, 'agregar'])->name('clientes.agregar');
+Route::get('/clientes/modificar', [ClienteController::class, 'modificar'])->name('clientes.modificar');
+Route::delete('/clientes/{id_cliente}', [ClienteController::class, 'borrar'])->name('clientes.borrar');
 
 
 //rutas para compras
@@ -103,12 +103,12 @@ Route::get('/anuladas', function () {
 
 
 //rutas para lista
-Route::get('/lista', [listacontroller::class, 'mostrar'])->name('views.lista');
-Route::POST('/lista', [listacontroller::class, 'agregar'])->name('lista.agregar');
-Route::POST('/lista/modificar', [listacontroller::class, 'modificar'])->name('lista.modificar');
-Route::delete('/lista/{id_producto}', [listacontroller::class, 'borrar'])->name('lista.borrar');
-Route::post('/lista/aumentar-precio-venta', [listacontroller::class, 'aumentarPrecioPorProveedor'])->name('productos.aumentarPrecio');
-Route::post('/lista/aumentar-precio-lista', [listacontroller::class, 'aumentarPreciolistaPorProveedor'])->name('productos.aumentarPreciolista');
+Route::get('/lista', [ListaController::class, 'mostrar'])->name('views.lista');
+Route::POST('/lista', [ListaController::class, 'agregar'])->name('lista.agregar');
+Route::POST('/lista/modificar', [ListaController::class, 'modificar'])->name('lista.modificar');
+Route::delete('/lista/{id_producto}', [ListaController::class, 'borrar'])->name('lista.borrar');
+Route::post('/lista/aumentar-precio-venta', [ListaController::class, 'aumentarPrecioPorProveedor'])->name('productos.aumentarPrecio');
+Route::post('/lista/aumentar-precio-lista', [ListaController::class, 'aumentarPreciolistaPorProveedor'])->name('productos.aumentarPreciolista');
 
 
 
