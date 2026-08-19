@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Promocioncontroller;
+use App\Http\Controllers\PromocionController;
 use App\Http\Controllers\ListaController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\GastosController;
