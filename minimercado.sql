@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2026 a las 23:03:19
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 19-08-2026 a las 15:10:33
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,16 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('solucioneselectricaslocal@gmail.com|127.0.0.1', 'i:1;', 1786647678),
+('solucioneselectricaslocal@gmail.com|127.0.0.1:timer', 'i:1786647678;', 1786647678),
+('usuario2t@gmaail.com|127.0.0.1', 'i:1;', 1783715561),
+('usuario2t@gmaail.com|127.0.0.1:timer', 'i:1783715561;', 1783715561);
 
 -- --------------------------------------------------------
 
@@ -62,20 +72,12 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `categoria`, `descripcion`) VALUES
-(1, 'A - Térmicas y Disyuntores', 'Dispositivos de protección eléctrica (Código A)'),
-(2, 'C - Cables', 'Cables conductores y unipolares (Código C)'),
-(3, 'D - Cajas de PVC y METAL', 'Cajas de paso, embutir y exteriores (Código D)'),
-(4, 'H - Herramientas e Instrumentos', 'Herramientas de mano e instrumentos de medición (Código H)'),
-(5, 'I - Iluminación', 'Lámparas, paneles LED y artefactos (Código I)'),
-(6, 'K - Canalización y accesorios', 'Caños, cablescanales y conectores (Código K)'),
-(7, 'LL - Llaves, modulos, bastidores', 'Interruptores, tomacorrientes y bastidores (Código LL)'),
-(8, 'P - Puesta a Tierra', 'Jabalinas, morcetis y mallas (Código P)'),
-(9, 'T - Tableros y elementos', 'Tableros principales, seccionales y cajas térmicas (Código T)'),
-(10, 'V - Ventiladores', 'Ventiladores de techo, pared y turbinas (Código V)'),
-(11, 'X - Accesorios para cables', 'Terminales, precintos y aisladoras (Código X)'),
-(12, 'Y - Varios', 'Artículos varios de ferretería eléctrica (Código Y)'),
-(13, 'S - Servicios y mantenimientos', 'Servicios técnicos y mano de obra (Código S)'),
-(14, 'IN - Instalaciones', 'Proyectos e instalaciones eléctricas completas (Código IN)');
+(1, 'cubiertas', '-'),
+(2, 'camaras', '-'),
+(3, 'combustibles', '-'),
+(4, 'lubricantes', '-'),
+(5, 'servicios', '-'),
+(6, 'otros', '-');
 
 -- --------------------------------------------------------
 
@@ -193,6 +195,15 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1);
 
 -- --------------------------------------------------------
 
@@ -333,6 +344,13 @@ CREATE TABLE `sessions` (
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('QeWZ4rHEdeqZrFjqWdn2e5cBtbbilCawiYMssipU', 22, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVGN3NnhUcUJCVzJ0QU51RlF1YUtHbE1QcmNTdHVZUkx5WklNcFJlQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90aWNrZXQvMjMyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7fQ==', 1787141802);
+
 -- --------------------------------------------------------
 
 --
@@ -351,6 +369,13 @@ CREATE TABLE `users` (
   `rol` enum('administrador','empleado') DEFAULT NULL,
   `estado` enum('activo','desactivado') DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `rol`, `estado`) VALUES
+(11, 'Admin', 'Admin@gmail.com', NULL, '$2y$12$hpNDjfYkMgeTmfpK8bhfCesIBK19cXtlAuUT0/1v8NQXFwE574Hhe', 'PhLvxW0N61Y1rCm0tHs509mUCHQcev6nU20bbKutVGQIBtDgvjf2mqZnGUqT', '2024-11-25 22:48:17', '2024-11-25 22:48:17', 'administrador', 'activo');
 
 -- --------------------------------------------------------
 
@@ -580,7 +605,7 @@ ALTER TABLE `ventas_productos`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_categoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_corrientes`
@@ -622,7 +647,7 @@ ALTER TABLE `metodos_pago`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `presupuestos`
@@ -670,7 +695,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`

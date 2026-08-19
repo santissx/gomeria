@@ -167,11 +167,11 @@ class HistorialController extends Controller
             ->get();
 
         $local = [
-            'nombre'    => 'SOLUCIONES ELÉCTRICAS',
-            'telefono'  => '3705033180',
-            'direccion' => 'AV. Cabral 586 - Formosa Capital',
-            'facebook'  => 'Soluciones Eléctricas Fsa',
-            'instagram' => '@solucioneselectricasfsa',
+            'nombre'    => '-',
+            'telefono'  => '-',
+            'direccion' => '-',
+            'facebook'  => '-',
+            'instagram' => '',
         ];
 
         return view('ticket', compact('venta', 'productos', 'local'));

@@ -32,11 +32,11 @@ class PresupuestoController extends Controller
         }
 
         $local = [
-            'nombre'    => 'Soluciones Eléctricas',
-            'telefono'  => '3705033180',
-            'direccion' => 'AV. Cabral 586 - Formosa Capital',
-            'facebook'  => 'Soluciones Eléctricas',
-            'instagram' => '@solucioneselectricasfsa'
+            'nombre'    => '-',
+            'telefono'  => '-',
+            'direccion' => '-',
+            'facebook'  => '-',
+            'instagram' => '-'
         ];
 
         return view('presupuesto', compact('productos', 'promociones', 'local'));
@@ -380,11 +380,11 @@ class PresupuestoController extends Controller
         }
 
         $local = [
-            'nombre'    => 'Soluciones Eléctricas',
-            'telefono'  => '3705033180',
-            'direccion' => 'AV. Cabral 586 - Formosa Capital',
-            'facebook'  => 'Soluciones Eléctricas',
-            'instagram' => '@solucioneselectricasfsa'
+            'nombre'    => '-',
+            'telefono'  => '-',
+            'direccion' => '-',
+            'facebook'  => '-',
+            'instagram' => '-'
             
         ];
 
