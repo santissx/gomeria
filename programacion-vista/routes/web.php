@@ -9,7 +9,7 @@ use App\Http\Controllers\GastosController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProductoConller;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\VentasAnuController;
