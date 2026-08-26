@@ -150,15 +150,16 @@
         </div>
 </form>
 
+
     <div class="col-lg-4 right-column">
         @include('parciales.columna_derecha')
-        <div class="mt-4">
+       {{-- <div class="mt-4">
             <a href="{{ route('backup.db') }}" class="btn btn-outline-info w-100 shadow-sm d-flex justify-content-center align-items-center gap-2">
                 <i class="fas fa-database"></i> Descargar Backup Completo
             </a>
-        </div>
+        </div>--}}
     </div>
-</div>
+</div> 
 
 {{-- MODAL: Buscar Producto --}}
 <div class="modal fade" id="buscarProductoModal" tabindex="-1" aria-labelledby="buscarProductoModalLabel" aria-hidden="true">

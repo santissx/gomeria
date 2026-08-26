@@ -133,14 +133,21 @@
                     </div>
                     
                     @if(Auth::check() && Auth::user()->rol === 'administrador')
-                        <div class="action-buttons d-flex flex-column flex-sm-row gap-2 mt-3">
-                            <button type="button" class="btn btn-primary w-100 w-sm-auto" data-bs-toggle="modal" data-bs-target="#aumentarPreciosventaModal">
-                                Aumentar precios de venta por proveedor
-                            </button>
-                            <button type="button" class="btn btn-primary w-100 w-sm-auto" data-bs-toggle="modal" data-bs-target="#aumentarPrecioslistaModal">
-                                Aumentar precios de lista por proveedor
-                            </button>
-                        </div>
+                      <div class="action-buttons d-flex gap-2 mt-3">
+    <button type="button"
+            class="btn btn-primary flex-fill"
+            data-bs-toggle="modal"
+            data-bs-target="#aumentarPreciosventaModal">
+        Aumentar precios de venta por proveedor
+    </button>
+
+    <button type="button"
+            class="btn btn-primary flex-fill"
+            data-bs-toggle="modal"
+            data-bs-target="#aumentarPrecioslistaModal">
+        Aumentar precios de lista por proveedor
+    </button>
+</div>
                     @endif
                 </div>
             </div> 
