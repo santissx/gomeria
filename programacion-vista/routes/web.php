@@ -19,6 +19,7 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\HistorialPresupuestoController;
+use App\Http\Controllers\EstanteriaController;
 
 //rutas del login 
 
@@ -172,3 +173,6 @@ Route::put('/historial-presupuestos/actualizar-precios/{id}', [HistorialPresupue
 // Editar un presupuesto por completo
 Route::get('/presupuestos/editar/{id}', [PresupuestoController::class, 'editar'])->name('presupuesto.editar');
 Route::put('/presupuestos/actualizar/{id}', [PresupuestoController::class, 'actualizar'])->name('presupuesto.actualizar');
+// Rutas estanterias
+Route::get('/estanterias', [EstanteriaController::class, 'index'])->name('views.estanterias');
+Route::post('/estanterias', [EstanteriaController::class, 'store'])->name('estanterias.store');

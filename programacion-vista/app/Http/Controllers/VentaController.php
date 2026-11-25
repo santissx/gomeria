@@ -41,11 +41,11 @@ class VentaController extends Controller
     public function buscarProductos(Request $request)
     {
         $queryStr = $request->get('q');
-    
+
         $consulta = DB::table('productos')->where('estado', 'activo');
 
         if (!empty($queryStr)) {
-            
+
             $palabras = array_filter(explode(' ', $queryStr));
 
             $consulta->where(function ($q) use ($palabras) {
@@ -56,6 +56,8 @@ class VentaController extends Controller
                     });
                 }
             });
+
+            $consulta->orderByRaw('CASE WHEN codigo_barra = ? THEN 0 ELSE 1 END', [$queryStr]);
         }
 
         $productos = $consulta->take(30)->get();

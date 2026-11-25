@@ -324,7 +324,96 @@
                 .catch(error => console.error('Error en la búsqueda:', error));
         }
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalBuscarEl = document.getElementById('buscarProductoModal');
+        const inputBuscar = document.getElementById('buscarProductoInput');
 
+        if (modalBuscarEl && inputBuscar) {
+            // Enfocar automáticamente al abrir el modal para recibir el escaneo
+            modalBuscarEl.addEventListener('shown.bs.modal', function () {
+                inputBuscar.value = '';
+                document.getElementById('resultadosProductos').innerHTML = '';
+                inputBuscar.focus();
+            });
+
+            // Si el lector envía "Enter" tras escanear el código de barras
+            inputBuscar.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const codigoEscaneado = this.value.trim();
+                    if (!codigoEscaneado) return;
+
+                    buscarYAgregarPorCodigo(codigoEscaneado);
+                }
+            });
+        }
+    });
+    function buscarYAgregarPorCodigo(codigo) {
+        fetch(`/buscar-productos?q=${encodeURIComponent(codigo)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!Array.isArray(data) || data.length === 0) return;
+
+                // Prioriza coincidencia exacta en codigo_barra; si hay 1 resultado, toma ese
+                const exacto = data.find(p => String(p.codigo_barra || '').trim() === codigo);
+                const producto = exacto || (data.length === 1 ? data[0] : null);
+
+                if (!producto) return;
+
+                agregarProductoDirectoAVenta(producto);
+
+                const inputBuscar = document.getElementById('buscarProductoInput');
+                if (inputBuscar) {
+                    inputBuscar.value = '';
+                    inputBuscar.focus();
+                }
+
+                // Si querés cerrar el modal tras escanear 1 producto, descomentá estas 2 líneas:
+                // const modal = bootstrap.Modal.getInstance(document.getElementById('buscarProductoModal'));
+                // if (modal) modal.hide();
+            })
+            .catch(error => console.error('Error al buscar por código de barras:', error));
+    }
+    function agregarProductoDirectoAVenta(producto) {
+        const id_producto = producto.id_producto;
+        if (!id_producto) return;
+
+        const codigo_barra = producto.codigo_barra || '-';
+        const nombre = producto.nombre;
+        const precio = parseFloat(producto.precio_venta) || 0;
+        const stock = parseInt(producto.stock, 10) || 0;
+
+        const rowId = `normal-${id_producto}`;
+        const filaExistente = document.querySelector(`tr[data-row-id="${rowId}"]`);
+
+        if (filaExistente) {
+            const inputCant = filaExistente.querySelector('.cantidad');
+            inputCant.value = parseInt(inputCant.value, 10) + 1;
+            actualizarTotal(inputCant);
+        } else {
+            itemIndex++;
+            const tablaVentas = document.getElementById('tablaVentas');
+            const nuevaFila = document.createElement('tr');
+            nuevaFila.setAttribute('data-row-id', rowId);
+
+            nuevaFila.innerHTML = `
+                <td>${codigo_barra}</td>
+                <td>${nombre}</td>
+                <td>
+                    <input type="number" name="productos[${itemIndex}][cantidad]" value="1" min="1" class="form-control cantidad" data-precio="${precio}" data-stock="${stock}" oninput="actualizarTotal(this)">
+                    <input type="hidden" name="productos[${itemIndex}][id_producto]" value="${id_producto}">
+                    <input type="hidden" name="productos[${itemIndex}][precio]" value="${precio}">
+                </td>
+                <td>$${precio.toFixed(2)}</td>
+                <td class="precio-total">$${precio.toFixed(2)}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-danger btn-sm px-2 py-1" onclick="quitarProductoDelCarrito(this)">×</button>
+                </td>`;
+            tablaVentas.appendChild(nuevaFila);
+        }
+
+        calcularTotalVenta();
+    }
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('agregar-producto')) {
             const fila = e.target.closest('tr');
