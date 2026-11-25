@@ -169,7 +169,15 @@
                                     <span class="ms-2">Historial de presupuestos</span>
                                 </a>
                             </div>
-                            <div class="col-12 d-flex">
+                            
+                            <div class="col-6 d-flex">
+                                <a href="{{ route('views.estanterias') }}"
+                                    class="btn btn-dark w-100 d-flex flex-column align-items-center justify-content-center">
+                                    <span>🗄️</span>
+                                    <span class="ms-2">Estanterías</span>
+                                </a>
+                            </div>
+                            <div class="col-6 d-flex">
                                 <form method="POST" action="{{ route('logout') }}" class="w-100 m-0 d-flex">
                                     @csrf
                                     <button type="submit"
